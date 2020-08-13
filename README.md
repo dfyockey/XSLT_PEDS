@@ -89,17 +89,22 @@ README for XSLT_PEDS
          unzipo - Unzip to One - Unzips a PEDS collection of Xml files
                   and combines them into one uniquely-named Xml file.
   
-     The Xml file, files, or folder containing Xml files should appear in
-     the XSLT_PEDS folder. Each of these files differs from a simply
-     unzipped file in the addition of a link required to enable formatting
-     in a properly-configured browser.
+     When run, the choosen unzipping script will act on the latest .zip
+     file it finds in the XSLT_PEDS folder. The Xml file, files, or folder
+     containing Xml files should appear in the XSLT_PEDS folder. Each of
+     these files differs from a simply unzipped file in the addition of
+     a link required to enable formatting in a properly-configured browser.
      
-     Additionally, the downloaded zip file should disappear and, if not
+     Additionally, the downloaded .zip file should disappear and, if not
      already there, a zipTrash folder should appear. The unzipping
-     scripts move downloaded zip files into zipTrash upon completion.
-     The downloded zip files are unchanged, so they can be used again if
+     scripts move downloaded .zip files into zipTrash upon completion.
+     The downloded .zip files are unchanged, so they can be used again if
      desired. You can retain or delete zipTrash or its contents as you
      wish.
+     
+     If run from the command line in a terminal, the file to be unzipped
+     may alternatively be provided as an argument to any of the unzipping
+     scripts
      
   5. Open one of the generated Xml files to view the formatted PEDS data.
   
