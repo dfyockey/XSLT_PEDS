@@ -34,11 +34,16 @@ README for XSLT_PEDS
   XSLT_PEDS files from your file manager.
   
   In Gnome Files:
+  
     1. Click ☰
+    
     2. Click "Preferences"
+    
     3. Click "Behavior"
+    
     4. Under "Executable Text Files",
        select either "Run them" or "Ask what to do", whichever you prefer.
+       
     5. Close the "Preferences" window.
     
   Note: Nothing tragic will happen if you try to running, say, SETUP and
