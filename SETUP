@@ -1,0 +1,69 @@
+#!/bin/bash
+
+# SETUP - XSLT_PEDS Setup Script
+#
+# Copyright © 2020 David Yockey
+#
+# XSLT_PEDS is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# XSLT_PEDS is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with XSLT_PEDS.  If not, see <https://www.gnu.org/licenses/>.
+
+app1="chromium4xslt"
+app2="chrome4xslt"
+
+file1="$app1.desktop"
+file2="$app2.desktop"
+
+echo -e "[Desktop Entry]\nEncoding=UTF-8\nVersion=1.0\nType=Application\nNoDisplay=true" | tee "$file1" > "$file2"
+echo -e "Exec='$HOME/XSLT_PEDS/$app1' %f\nName=$app1" >> "$file1"
+echo -e "Exec='$HOME/XSLT_PEDS/$app2' %f\nName=$app2" >> "$file2"
+echo -n 'Comment=Launch ' | tee -a "$file1" >> "$file2"
+echo -ne "Chromium " >> "$file1"
+echo -ne "Chrome " >> "$file2"
+echo -e 'with access to local files\nMimeType=application/xml' | tee -a "$file1" >> "$file2"
+
+if [ -e "/usr/bin/chromium" -o -e "/usr/bin/chromium-browser" ]
+	then
+		xdg-mime default chromium4xslt.desktop application/xml
+	elif [ -e "/usr/bin/google-chrome" ]
+		then
+			xdg-mime default chrome4xslt.desktop application/xml
+	else
+		errmsg="Neither Chromium nor Chrome found.\nTo use XSLT_PEDS, please install either Chromium or Chrome, and then rerun SETUP."
+		if [ -e "/usr/bin/zenity" ]
+			then
+				zenity --error --title="XSLT_PEDS Setup" --window-icon='error' --text="$errmsg" --no-wrap
+			else
+				echo "$errmsg"
+		fi
+		
+		rm -f $file1 $file2
+		
+		exit 1
+fi
+
+mv "$file1" "$file2" $HOME/.local/share/applications
+
+if [ -e "/usr/bin/zenity" ]
+	then
+		zenity --info --window-icon='info' --text="SETUP Complete!" --no-wrap
+	else
+		echo "SETUP Complete!"
+fi
+
+if [ -e "/usr/bin/unzip" ]
+	warnmsg="The unzip utility was not found.\nPlease install unzip to enable scripts to unzip PEDS zip files."
+	then
+		zenity --warning --title="XSLT_PEDS Setup" --window-icon='warning' --text="$warnmsg" --no-wrap
+	else
+		echo "$warnmsg"
+fi
