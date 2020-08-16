@@ -71,7 +71,7 @@
 						text-decoration: line-through;
 					}
 					
-					#transhistory th {
+					.longtbl th {
 						text-align:left;
 						padding-left:1ex;
 						color:#FFFFFF;
@@ -79,7 +79,7 @@
 						font-style:italic;
 					}
 					
-					#transhistory th, #transhistory td {
+					.longtbl th, .longtbl td {
 						padding-top:1ex;
 						padding-bottom:1ex;
 					}
@@ -91,6 +91,7 @@
 				
 				<xsl:for-each select="uspat:PatentData">
 				
+				  <!-- Application Data -->
 				  <xsl:for-each select="uspat:PatentCaseMetadata">
 					
 					<xsl:variable name="first2file">
@@ -131,8 +132,9 @@
 
 				  </xsl:for-each>
 				  
+				  <!-- Transaction History -->
 				  <xsl:for-each select="uspat:ProsecutionHistoryDataBag">
-					<table id="transhistory">
+					<table class="longtbl">
 						<caption><h3>Transaction History</h3></caption>
 						<th width="20%">Date</th><th width="20%">Code</th><th width="60%">Transaction Description</th>
 						<xsl:for-each select="uspat:ProsecutionHistoryData">
@@ -141,6 +143,7 @@
 					</table>
 				  </xsl:for-each>
 
+				  <!-- Correspondence Address -->
 				  <xsl:for-each select="uspat:PatentCaseMetadata/uspat:PartyBag/com:CorrespondenceAddress">
 					<table>
 						<caption><h3>Correspondence Address</h3></caption>
@@ -161,6 +164,21 @@
 					</table>
 				  </xsl:for-each>
 
+				  <!-- Attorney/Agent Information -->
+				  <xsl:for-each select="uspat:PatentCaseMetadata/uspat:PartyBag/uspat:RegisteredPractitionerBag">
+					<table class="longtbl">
+						<caption><h3>Attorney/Agent Information</h3></caption>
+						<th width="20%">Reg#</th><th width="40%">Name</th><th width="40%">Phone</th>
+						<xsl:for-each select="uspat:RegisteredPractitioner">
+							<tr>
+								<td><xsl:value-of select="pat:RegisteredPractitionerRegistrationNumber"/></td>
+								<td><xsl:value-of select="com:Contact/com:Name"/><xsl:if test="@uscom:activeIndicator = 'false'">(not active)</xsl:if></td>
+								<td><xsl:value-of select="com:Contact/com:PhoneNumberBag"/></td>
+							</tr>
+						</xsl:for-each>
+					</table>
+				  </xsl:for-each>
+
 				</xsl:for-each>
 
 				<hr />
@@ -169,14 +187,5 @@
 		
 	</html>
 </xsl:template>
-
-
-<xsl:template match="uspat:PatentTermData">
-</xsl:template>
-
-<xsl:template match="uspat:AssignmentDataBag">
-</xsl:template>
-
-
 
 </xsl:stylesheet>
