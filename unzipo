@@ -56,7 +56,7 @@ touch $newfile
 # Decompress zip file into $newdir
 unzip -qq -d $newdir $zipfile
 
-# Combine all Xml files from zip file into a single Xml file
+# Combine all Xml files from the zip file into a single Xml file
 firstfile=1
 for file in $newdir/*.xml
 	do
@@ -64,16 +64,7 @@ for file in $newdir/*.xml
 		
 		if [ "$firstfile" -eq 1 ]
 			then
-				# For the first file...
-			
-				bfile=$(basename "$file")
-		
-				## Insert Xslt linkage - Based on answer at https://stackoverflow.com/a/6541653/8100489
-				awk -v ln=2 -v xsltln='<?xml-stylesheet type="text/xsl" href="peds.xsl"?>' 'NR == ln {print xsltln} {print}' "$file" > "/tmp/$bfile"
-		
-				## Intentionally OVERWRITE original Xml file with awked Xml file including Xslt linkage
-				mv "/tmp/$bfile" "$file"
-				
+				# For the first file, do nothing but clear a flag...
 				firstfile=0
 			else
 			    # For the second and each subsequent file...
@@ -97,12 +88,19 @@ for file in $newdir/*.xml
 # Finish the new combined file by appending a closing uspat:PatentBulkData tag
 echo "</uspat:PatentBulkData>" >> $newfile
 
+# Generate unique name for new html file - Based on answer https://stackoverflow.com/a/1224786/8100489
+htmlname="$(basename -s .xml "$newfile").peds.htm"
+
+# Translate combined Xml file to Html files based on XSLT file peds.xsl
+Xalan -o "$htmlname" "$newfile" "peds.xsl"
+
 # TODO - Add item indices preceeding pat:InventionTitle content
 #        as reassurance that data for all documents are displayed.
 #        Use awk for this?
 
 # Cleanup
 rm -rf $newdir
+rm -f $newfile
 if [ ! -d ./zipTrash ]
 	then
 		mkdir zipTrash

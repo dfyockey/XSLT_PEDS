@@ -52,23 +52,20 @@ mkdir $newdir
 # Decompress zip file into $newdir
 unzip -qq -d $newdir $zipfile
 
-# Insert Xslt linkages into Xml files
+# Translate Xml files to Html files based on XSLT file peds.xsl,
+# where the Html files are located in the uniquely-named directory
 for file in $newdir/*.xml
 	do
 		[ -e "$file" ] || continue
 		
-		bfile=$(basename "$file")
+		# Generate name for new html file - Based on answer https://stackoverflow.com/a/1224786/8100489
+		htmlname="$newdir/$(basename -s .xml "$file").peds.htm"
 		
-		# Insert Xslt linkage - Based on answer at https://stackoverflow.com/a/6541653/8100489
-		awk -v ln=2 -v xsltln='<?xml-stylesheet type="text/xsl" href="peds.xsl"?>' 'NR == ln {print xsltln} {print}' $file > /tmp/$bfile
+		# Generate Html file from Xml file
+		Xalan -o "$htmlname" "$file" "peds.xsl"
 		
-		# Intentionally OVERWRITE original Xml file with awked Xml file including Xslt linkage
-		mv /tmp/$bfile $file
+		rm -f "$file"
 	done
-
-# Enable Xml files to access linked Xsl file in the parent directory as if it were in the same directory.
-target="$(pwd)/peds.xsl"
-ln -s -t $newdir $target
 
 # Cleanup
 if [ ! -d ./zipTrash ]
