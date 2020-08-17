@@ -112,6 +112,28 @@
 						</xsl:choose>
 					</xsl:variable>
 
+					<xsl:variable name="pubnum">
+						<xsl:choose>
+							<xsl:when test="uscom:ApplicationTypeCategory = 'PCT'">
+								WIPO Publication Number:
+							</xsl:when>
+							<xsl:otherwise>
+								Earliest Publication No (PGPUB):
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:variable>
+
+					<xsl:variable name="pubdate">
+						<xsl:choose>
+							<xsl:when test="uscom:ApplicationTypeCategory = 'PCT'">
+								WIPO Publication Date:
+							</xsl:when>
+							<xsl:otherwise>
+								Earliest Publication Date:
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:variable>
+
 					<hr />
 					<h2 class="doctitle"><xsl:value-of select="pat:InventionTitle"/></h2>
 					<table>
@@ -121,8 +143,8 @@
 						<tr><td class="rj">Application Type:</td><td><xsl:value-of select="uscom:ApplicationTypeCategory"/></td><td class="rj">Status Date:</td><td><xsl:value-of select="uscom:ApplicationStatusDate"/></td></tr>
 						<tr><td class="rj">Examiner Name:</td><td><xsl:value-of select="uspat:PartyBag/pat:ExaminerBag/pat:PrimaryExaminer/com:Name/com:PersonName/com:PersonFullName"/></td><td class="rj">Location:</td><td><xsl:value-of select="uscom:OfficialFileLocationCategory"/></td></tr>
 						<tr><td class="rj">Group Art Unit:</td><td><xsl:value-of select="uscom:GroupArtUnitNumber"/></td><td class="rj">Location Date:</td><td><xsl:value-of select="uscom:OfficialFileLocationDate"/></td></tr>
-						<tr><td class="rj">Confirmation Number:</td><td><xsl:value-of select="uspat:ApplicationConfirmationNumber"/></td><td class="rj">Earliest Publication No (PGPUB):</td><td><xsl:value-of select="uspat:PatentPublicationIdentification/pat:PublicationNumber"/></td></tr>
-						<tr><td class="rj">Attorney Docket Number:</td><td><xsl:value-of select="com:ApplicantFileReference"/></td><td class="rj">Earliest Publication Date:</td><td><xsl:value-of select="uspat:PatentPublicationIdentification/com:PublicationDate"/></td></tr>
+						<tr><td class="rj">Confirmation Number:</td><td><xsl:value-of select="uspat:ApplicationConfirmationNumber"/></td><td class="rj"><xsl:value-of select="$pubnum"/></td><td><xsl:if test="uscom:ApplicationTypeCategory = 'PCT'">WO</xsl:if><xsl:value-of select="uspat:PatentPublicationIdentification/pat:PublicationNumber"/></td></tr>
+						<tr><td class="rj">Attorney Docket Number:</td><td><xsl:value-of select="com:ApplicantFileReference"/></td><td class="rj"><xsl:value-of select="$pubdate"/></td><td><xsl:value-of select="uspat:PatentPublicationIdentification/com:PublicationDate"/></td></tr>
 						<tr><td class="rj">Class / Subclass:</td><td><xsl:value-of select="pat:PatentClassificationBag/pat:NationalClassification/pat:MainNationalClassification/pat:NationalClass"/>/<xsl:value-of select="pat:PatentClassificationBag/pat:NationalClassification/pat:MainNationalClassification/pat:NationalSubclass"/></td><td class="rj">Patent Number:</td><td><xsl:value-of select="uspat:PatentGrantIdentification/pat:PatentNumber"/></td></tr>
 						<tr><td class="rj">Inventors:</td><td><xsl:for-each select="uspat:PartyBag/pat:InventorBag/pat:Inventor"><xsl:value-of select="com:PublicationContact/com:Name/com:PersonName/com:PersonStructuredName/com:FirstName"/>&#160;<xsl:if test="com:PublicationContact/com:Name/com:PersonName/com:PersonStructuredName/com:MiddleName != ''"><xsl:value-of select="com:PublicationContact/com:Name/com:PersonName/com:PersonStructuredName/com:MiddleName"/>&#160;</xsl:if><xsl:value-of select="com:PublicationContact/com:Name/com:PersonName/com:PersonStructuredName/com:LastName"/><br /></xsl:for-each></td><td class="rj">Issue Date of Patent:</td><td><xsl:value-of select="uspat:PatentGrantIdentification/pat:GrantDate"/></td></tr>
 						<tr><td class="rj">First Named Applicant:</td><td><xsl:value-of select="uspat:PartyBag/pat:ApplicantBag/pat:Applicant/com:PublicationContact/com:Name/com:OrganizationName/com:OrganizationStandardName"/></td><td class="rj">AIA (First Inventor to File):</td><td><xsl:value-of select="$first2file"/></td></tr>
