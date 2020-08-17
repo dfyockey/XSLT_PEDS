@@ -66,9 +66,9 @@ README for XSLT_PEDS
      desired. You can retain or delete zipTrash or its contents as you
      wish.
      
-     If run from the command line in a terminal, the file to be unzipped
-     may alternatively be provided as an argument to any of the unzipping
-     scripts
+     The unzipping scripts may be run either from a file manager or the
+     command line. If run from the command line, the file to be unzipped
+     may alternatively be provided as an argument.
      
   5. Open one of the generated Html files to view the formatted PEDS data.
   
