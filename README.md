@@ -19,8 +19,8 @@ README for XSLT_PEDS
   
   The following software is required or recommended for use with XSLT_PEDS:
   
-    - Xalan (listed in package managers as 'xalan-c', required)
-    - Xerces (listed in package managers as 'xerces-c', required)
+    - Xalan (may be listed in package managers as 'xalan-c', required)
+    - Xerces (may be listed in package managers as 'xerces-c', required)
     - unzip (required)
     - zenity (recommended)
 
