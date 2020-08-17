@@ -165,6 +165,8 @@
 					</table>
 				  </xsl:for-each>
 
+				  <!-- TODO : Patent Term Adjustment tab -->
+
 				  <!-- Correspondence Address -->
 				  <xsl:for-each select="uspat:PatentCaseMetadata/uspat:PartyBag/com:CorrespondenceAddress">
 					<table>
@@ -200,6 +202,43 @@
 						</xsl:for-each>
 					</table>
 				  </xsl:for-each>
+
+				  <!-- Continuity Data tab -->
+				  <xsl:for-each select="uspat:PatentCaseMetadata/uspat:RelatedDocumentData">
+
+					<table class="longtbl">
+						<caption><h3>Parent Continuity Data</h3></caption>
+						<th width="20%">Description</th><th width="16%">Parent Number</th><th width="16%">Parent Filing or 371(C) Date</th><th width="16%">AIA(First Inventor to File)</th><th width="16%">Parent Status</th><th width="16%">Patent Number</th>
+
+						<!-- Test to check for node non-existance - suggested by a comment responding to the answer at https://stackoverflow.com/a/767873/8100489 -->
+						<xsl:if test="not(uspat:ParentDocumentData/node())"><tr><td>No Parent Continuity Data Found.</td></tr></xsl:if>
+
+						<xsl:for-each select="uspat:ParentDocumentData">
+							<tr>
+								<td><xsl:value-of select="uscom:DescriptionText"/></td>
+								<td><xsl:value-of select="com:ApplicationNumberText"/></td>
+								<td><xsl:value-of select="pat:FilingDate"/></td>
+								<td><xsl:value-of select="uspat:AIAIndicator"/></td>
+								<td><xsl:value-of select="pat:ParentDocumentStatusCode"/></td>
+								<td><xsl:value-of select="pat:PatentNumber"/></td>
+							</tr>
+						</xsl:for-each>
+					</table>
+
+					<table>
+						<caption><h3>Child Continuity Data</h3></caption>
+						<!-- Test to check for node non-existance - suggested by a comment responding to the answer at https://stackoverflow.com/a/767873/8100489 -->
+						<xsl:if test="not(uspat:ChildDocumentData/node())"><tr><td>No Child Continuity Data Found.</td></tr></xsl:if>
+						<xsl:for-each select="uspat:ChildDocumentData">
+							<tr><td><xsl:value-of select="com:ApplicationNumberText"/> filed on <xsl:value-of select="pat:FilingDate"/>&#160;<xsl:value-of select="uscom:DescriptionText"/></td></tr>
+						</xsl:for-each>
+					</table>
+
+				  </xsl:for-each>
+
+				  <!-- TODO : Foreign Priority tab -->
+
+				  <!-- TODO : Assignments tab -->
 
 				</xsl:for-each>
 
