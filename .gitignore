@@ -1,3 +1,12 @@
 # XSLT_PEDS gitignore file
 
+# The following folder may be generated during testing.
 zipTrash/
+
+# The following scripts, which aren't part of the XSLT_PEDS collection,
+# follow the old paradigm. They are used to facilitate rapid peds.xsl
+# development by allowing for testing in a browser without need to
+# generate a new Html file subsequent to peds.xsl changes.
+unzipa_dev
+unzipf_dev
+unzipo_dev

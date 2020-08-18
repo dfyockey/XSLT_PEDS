@@ -71,7 +71,7 @@
 						text-decoration: line-through;
 					}
 					
-					.longtbl th {
+					.listtbl th, .blocktbl th {
 						text-align:left;
 						padding-left:1ex;
 						color:#FFFFFF;
@@ -79,9 +79,17 @@
 						font-style:italic;
 					}
 					
-					.longtbl th, .longtbl td {
+					.listtbl th, .listtbl td, .blocktbl th {
 						padding-top:1ex;
 						padding-bottom:1ex;
+					}
+
+					.blocktbl td {
+						line-height:1.4em;
+					}
+
+					.grayrow {
+						background-color:#f8f8f8;
 					}
 			</style>
 		</head>
@@ -136,7 +144,7 @@
 
 					<hr />
 					<h2 class="doctitle"><xsl:value-of select="pat:InventionTitle"/></h2>
-					<table>
+					<table class="blocktbl">
 						<caption><h3>Application Data</h3></caption>
 						<tr><td class="rj" width="25%">Application Number:</td><td width="25%"><xsl:value-of select="uscom:ApplicationNumberText"/></td><td class="rj" width="25%">Correspondence Address Customer Number:</td><td width="25%"><xsl:value-of select="uspat:PartyBag/com:CorrespondenceAddress/com:PartyIdentifier"/></td></tr>
 						<tr><td class="rj">Filing or 371 (c) Date:</td><td><xsl:value-of select="pat:FilingDate"/></td><td class="rj">Status:</td><td><xsl:value-of select="uscom:ApplicationStatusCategory"/></td></tr>
@@ -156,7 +164,7 @@
 				  
 				  <!-- Transaction History -->
 				  <xsl:for-each select="uspat:ProsecutionHistoryDataBag">
-					<table class="longtbl">
+					<table class="listtbl">
 						<caption><h3>Transaction History</h3></caption>
 						<th width="20%">Date</th><th width="20%">Code</th><th width="60%">Transaction Description</th>
 						<xsl:for-each select="uspat:ProsecutionHistoryData">
@@ -190,7 +198,7 @@
 
 				  <!-- Attorney/Agent Information -->
 				  <xsl:for-each select="uspat:PatentCaseMetadata/uspat:PartyBag/uspat:RegisteredPractitionerBag">
-					<table class="longtbl">
+					<table class="listtbl">
 						<caption><h3>Attorney/Agent Information</h3></caption>
 						<th width="20%">Reg#</th><th width="40%">Name</th><th width="40%">Phone</th>
 						<xsl:for-each select="uspat:RegisteredPractitioner">
@@ -206,7 +214,7 @@
 				  <!-- Continuity Data tab -->
 				  <xsl:for-each select="uspat:PatentCaseMetadata/uspat:RelatedDocumentData">
 
-					<table class="longtbl">
+					<table class="listtbl">
 						<caption><h3>Parent Continuity Data</h3></caption>
 						<th width="20%">Description</th><th width="16%">Parent Number</th><th width="16%">Parent Filing or 371(C) Date</th><th width="16%">AIA(First Inventor to File)</th><th width="16%">Parent Status</th><th width="16%">Patent Number</th>
 
@@ -225,7 +233,7 @@
 						</xsl:for-each>
 					</table>
 
-					<table>
+					<table class="listtbl">
 						<caption><h3>Child Continuity Data</h3></caption>
 						<!-- Test to check for node non-existance - suggested by a comment responding to the answer at https://stackoverflow.com/a/767873/8100489 -->
 						<xsl:if test="not(uspat:ChildDocumentData/node())"><tr><td>No Child Continuity Data Found.</td></tr></xsl:if>
@@ -239,6 +247,26 @@
 				  <!-- TODO : Foreign Priority tab -->
 
 				  <!-- TODO : Assignments tab -->
+				  <xsl:for-each select="uspat:AssignmentDataBag">
+					<xsl:variable name="numassigns" select="@uspat:assignmentTotalQuantity"/>
+					<xsl:for-each select="uspat:AssignmentData">
+						<table class="blocktbl">
+							<xsl:if test="position() = 1"><caption><h3>Patent Assignment Abstract of Title</h3></caption></xsl:if>
+							<th colspan="4">Assignment: <xsl:value-of select="position()"/> of <xsl:value-of select="$numassigns"/></th>
+							<tr><td width="20%" class="rj">Reel/Frame:</td><td width="*"><xsl:value-of select="uspat:ReelNumber"/>/<xsl:value-of select="uspat:FrameNumber"/></td><td width="20%" class="rj"></td><td width="20%"></td></tr>
+							<tr><td class="rj">Pages</td><td><xsl:value-of select="com:PageTotalQuantity"/></td><td class="rj">Received date:</td><td><xsl:value-of select="com:DocumentReceivedDate"/></td></tr>
+							<tr><td class="rj">Recorded date:</td><td><xsl:value-of select="uscom:RecordedDate"/></td><td class="rj">Mailed date:</td><td><xsl:value-of select="com:MailDate"/></td></tr>
+							<tr><td class="rj">Conveyance:</td><td><xsl:value-of select="uscom:ConveyanceText"/></td><td class="rj"></td><td></td></tr>
+							<xsl:for-each select="uspat:AssignorBag/uspat:Assignor">
+								<tr class="grayrow"><td class="rj"><xsl:if test="position() = 1">Assignor:</xsl:if></td><td><xsl:value-of select="com:Contact"/></td><td class="rj">Exec Date:</td><td><xsl:value-of select="uscom:ExecutionDate"/></td></tr>
+							</xsl:for-each>
+							<xsl:for-each select="pat:AssigneeBag/pat:Assignee">
+								<tr><td class="rj"><xsl:if test="position() = 1">Assignee:</xsl:if></td><td><xsl:value-of select="com:Contact/com:Name"/><br /><xsl:for-each select="com:Contact/com:PostalAddressBag/com:PostalAddress/com:PostalAddressText"><xsl:value-of select="."/><br /></xsl:for-each></td><td class="rj"></td><td></td></tr>
+							</xsl:for-each>
+							<tr class="grayrow"><td class="rj">Correspondent:</td><td><xsl:value-of select="com:CorrespondenceAddress/com:Contact/com:Name"/><br /><xsl:for-each select="com:CorrespondenceAddress/com:Contact/com:PostalAddressBag/com:PostalAddress/com:PostalAddressText"><xsl:value-of select="."/><br /></xsl:for-each></td><td class="rj"></td><td></td></tr>
+						</table>
+					</xsl:for-each>
+				  </xsl:for-each>
 
 				</xsl:for-each>
 
