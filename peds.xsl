@@ -244,9 +244,22 @@
 
 				  </xsl:for-each>
 
-				  <!-- TODO : Foreign Priority tab -->
+				  <!-- Foreign Priority tab -->
+				  <xsl:for-each select="uspat:PatentCaseMetadata/uspat:PriorityClaimBag">
+					<table class="listtbl">
+						<caption><h3>Foreign Priority</h3></caption>
+						<th width="*">Country</th><th width="33%">Priority Application Number</th><th width="33%">Priority Filing Date</th>
+						<xsl:for-each select="uspat:PriorityClaim">
+							<tr>
+								<td><xsl:value-of select="uscom:IPOfficeName"/></td>
+								<td><xsl:value-of select="com:ApplicationNumber/com:ApplicationNumberText"/></td>
+								<td><xsl:value-of select="pat:FilingDate"/></td>
+							</tr>
+						</xsl:for-each>
+					</table>
+				  </xsl:for-each>
 
-				  <!-- TODO : Assignments tab -->
+				  <!-- Assignments tab -->
 				  <xsl:for-each select="uspat:AssignmentDataBag">
 					<xsl:variable name="numassigns" select="@uspat:assignmentTotalQuantity"/>
 					<xsl:for-each select="uspat:AssignmentData">
