@@ -173,11 +173,33 @@
 					</table>
 				  </xsl:for-each>
 
-				  <!-- TODO : Patent Term Adjustment tab -->
+				  <!-- Patent Term Adjustment tab -->
+				  <xsl:for-each select="uspat:PatentTermData/uspat:PatentTermAdjustmentData">
+					  
+				    <table class="blocktbl">
+						<caption><h3>Patent Term Adjustment</h3></caption>
+						<tr><td>Filing or 371(c) Date:</td><td><xsl:value-of select="/uspat:PatentBulkData/uspat:PatentData/uspat:PatentCaseMetadata/pat:FilingDate"/></td><td>Overlapping Days Between {A and B} or {A and C}:</td><td><xsl:value-of select="uspat:OverlappingDayQuantity"/></td></tr>
+						<tr><td>Issue Date of Patent:</td><td><xsl:value-of select="/uspat:PatentBulkData/uspat:PatentData/uspat:PatentCaseMetadata/uspat:PatentGrantIdentification/pat:GrantDate"/></td><td>Non-Overlapping USPTO Delays:</td><td><xsl:value-of select="uspat:NonOverlappingDayQuantity"/></td></tr>
+						<tr><td>A Delays:</td><td><xsl:value-of select="uspat:ADelayQuantity"/></td><td>PTO Manual Adjustments:</td><td><xsl:value-of select="uspat:IPOfficeDayDelayQuantity"/></td></tr>
+						<tr><td>B Delays:</td><td><xsl:value-of select="uspat:BDelayQuantity"/></td><td>Applicant Delays:</td><td><xsl:value-of select="uspat:ApplicantDayDelayQuantity"/></td></tr>
+						<tr><td>C Delays:</td><td><xsl:value-of select="uspat:CDelayQuantity"/></td><td>Total PTA Adjustments:</td><td><xsl:value-of select="uspat:AdjustmentTotalQuantity"/></td></tr>
+				    </table>
+				    
+				    <table class="listtbl">
+						<caption><h3>Patent Term Adjustment History</h3></caption>
+						<tr><th width="10%">Number</th><th width="15%">Date</th><th width="*">Contents Description</th><th width="15%">PTO (Days)</th><th width="15%">Appl (Days)</th><th width="10%">Start</th></tr>
+						<xsl:for-each select="uspat:PatentTermAdjustmentHistoryDataBag/uspat:PatentTermAdjustmentHistoryData">
+							<tr><td><xsl:value-of select="uspat:EventSequenceNumber"/></td><td><xsl:value-of select="uspat:EventDate"/></td><td><xsl:value-of select="uspat:EventDescriptionText"/></td><td><xsl:if test="uspat:IPOfficeDayDelayQuantity &gt; 0"><xsl:value-of select="uspat:IPOfficeDayDelayQuantity"/></xsl:if></td><td><xsl:if test="uspat:ApplicantDayDelayQuantity &gt; 0"><xsl:value-of select="uspat:ApplicantDayDelayQuantity"/></xsl:if></td><td><xsl:value-of select="uspat:OriginatingEventSequenceNumber"/></td></tr>
+						</xsl:for-each>
+					</table>
+					
+				  </xsl:for-each>
+				  
+				  
 
 				  <!-- Correspondence Address -->
 				  <xsl:for-each select="uspat:PatentCaseMetadata/uspat:PartyBag/com:CorrespondenceAddress">
-					<table>
+					<table class="blocktbl">
 						<caption><h3>Correspondence Address</h3></caption>
 						<tr><td>Name:</td><td><xsl:value-of select="com:Contact/com:Name/com:PersonName/com:PersonStructuredName/com:LastName"/></td></tr>
 						<xsl:for-each select="com:Contact/com:PostalAddressBag/com:PostalAddress/com:PostalStructuredAddress">
