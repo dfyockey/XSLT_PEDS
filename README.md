@@ -24,10 +24,31 @@ README for XSLT_PEDS
     - unzip (required)
     - zenity (recommended)
 
-    
+
   ** Setup **
 
   Simply unzip the downloaded XSLT_PEDS zip file into folder of your choice.
+
+  If you are planning to use the Gnome Files file manager (and perhaps other
+  FMs), you may need to change a preference to enable running XSLT_PEDS
+  scripts from your file manager.
+  
+    In Gnome Files:
+  
+    1. Click ☰
+    
+    2. Click "Preferences"
+
+    3. Click "Behavior"
+    
+    4. Under "Executable Text Files", select either "Run them" or
+     "Ask what to do", whichever you prefer.
+       
+    5. Close the "Preferences" window.
+    
+  Note: Nothing tragic will happen if you try to run a script and the file
+  mamager set up or able to do it. It'll just open a text editor showing
+  program code.
   
   
   ** Usage **
@@ -67,8 +88,10 @@ README for XSLT_PEDS
      wish.
      
      The unzipping scripts may be run either from a file manager or the
-     command line. If run from the command line, the file to be unzipped
-     may alternatively be provided as an argument.
+     command line. If run from the command line, the script name must be
+     preceded by `./` (e.g. `./unzipa`). Also, the file to be unzipped may
+     alternatively be provided as an argument when running from the
+     command line.
      
   5. Open one of the generated Html files to view the formatted PEDS data.
   
