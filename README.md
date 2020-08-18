@@ -47,8 +47,8 @@ README for XSLT_PEDS
     5. Close the "Preferences" window.
     
   Note: Nothing tragic will happen if you try to run a script and the file
-  mamager set up or able to do it. It'll just open a text editor showing
-  program code.
+  mamager isn't set up or able to do it. It'll just open a text editor
+  showing program code.
   
   
   ** Usage **
