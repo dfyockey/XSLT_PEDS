@@ -117,6 +117,7 @@
 					<hr />
 					<h2 class="doctitle"><xsl:value-of select="pat:InventionTitle"/></h2>
 					<table class="blocktbl">
+						<!-- AFAIK, values for the International Reg No and Reg Pub Date in this table apparently may only appear in design patents -->
 						<caption><h3>Application Data</h3></caption>
 						<tr><td class="rj" width="25%">Application Number:</td><td width="25%"><xsl:value-of select="uscom:ApplicationNumberText"/></td><td class="rj" width="25%">Correspondence Address Customer Number:</td><td width="25%"><xsl:value-of select="uspat:PartyBag/com:CorrespondenceAddress/com:PartyIdentifier"/></td></tr>
 						<tr><td class="rj">Filing or 371 (c) Date:</td><td><xsl:value-of select="pat:FilingDate"/></td><td class="rj">Status:</td><td><xsl:value-of select="uscom:ApplicationStatusCategory"/></td></tr>
@@ -128,8 +129,8 @@
 						<tr><td class="rj">Class / Subclass:</td><td><xsl:value-of select="pat:PatentClassificationBag/pat:NationalClassification/pat:MainNationalClassification/pat:NationalClass"/>/<xsl:value-of select="pat:PatentClassificationBag/pat:NationalClassification/pat:MainNationalClassification/pat:NationalSubclass"/></td><td class="rj">Patent Number:</td><td><xsl:value-of select="uspat:PatentGrantIdentification/pat:PatentNumber"/></td></tr>
 						<tr><td class="rj">Inventors:</td><td><xsl:for-each select="uspat:PartyBag/pat:InventorBag/pat:Inventor"><xsl:value-of select="com:PublicationContact/com:Name/com:PersonName/com:PersonStructuredName/com:FirstName"/>&#160;<xsl:if test="com:PublicationContact/com:Name/com:PersonName/com:PersonStructuredName/com:MiddleName != ''"><xsl:value-of select="com:PublicationContact/com:Name/com:PersonName/com:PersonStructuredName/com:MiddleName"/>&#160;</xsl:if><xsl:value-of select="com:PublicationContact/com:Name/com:PersonName/com:PersonStructuredName/com:LastName"/><br /></xsl:for-each></td><td class="rj">Issue Date of Patent:</td><td><xsl:value-of select="uspat:PatentGrantIdentification/pat:GrantDate"/></td></tr>
 						<tr><td class="rj">First Named Applicant:</td><td><xsl:value-of select="uspat:PartyBag/pat:ApplicantBag/pat:Applicant/com:PublicationContact/com:Name/com:OrganizationName/com:OrganizationStandardName"/></td><td class="rj">AIA (First Inventor to File):</td><td><xsl:value-of select="$first2file"/></td></tr>
-						<tr><td class="rj intreg">International Registration Number (Hague):</td><td></td><td class="rj">Entity Status:</td><td><xsl:value-of select="uscom:BusinessEntityStatusCategory"/></td></tr>
-						<tr><td class="rj intreg">International Registration Publication Date:</td><td></td><td></td></tr>
+						<tr><td class="rj">International Registration Number (Hague):</td><td><xsl:value-of select="com:HagueAgreementData/com:InternationalRegistrationNumber"/></td><td class="rj">Entity Status:</td><td><xsl:value-of select="uscom:BusinessEntityStatusCategory"/></td></tr>
+						<tr><td class="rj">International Registration Publication Date:</td><td><xsl:value-of select="com:HagueAgreementData/com:InternationalRegistrationPublicationDate"/></td><td></td></tr>
 					</table>
 
 				  </xsl:for-each>
