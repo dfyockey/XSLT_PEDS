@@ -103,43 +103,15 @@
 				  <xsl:for-each select="uspat:PatentCaseMetadata">
 					
 					<xsl:variable name="first2file">
-						<xsl:choose>
-							<xsl:when test="uspat:FirstInventorToFileIndicator = 'false'">
-								No
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:choose>
-									<xsl:when test="uspat:FirstInventorToFileIndicator = 'true'">
-										Yes
-									</xsl:when>
-									<xsl:otherwise>
-										<xsl:value-of select="uspat:FirstInventorToFileIndicator"/>
-									</xsl:otherwise>
-								</xsl:choose>
-							</xsl:otherwise>
-						</xsl:choose>
+						<xsl:choose><xsl:when test="uspat:FirstInventorToFileIndicator = 'true'">Yes</xsl:when><xsl:otherwise>No</xsl:otherwise></xsl:choose>
 					</xsl:variable>
 
 					<xsl:variable name="pubnum">
-						<xsl:choose>
-							<xsl:when test="uscom:ApplicationTypeCategory = 'PCT'">
-								WIPO Publication Number:
-							</xsl:when>
-							<xsl:otherwise>
-								Earliest Publication No (PGPUB):
-							</xsl:otherwise>
-						</xsl:choose>
+						<xsl:choose><xsl:when test="uscom:ApplicationTypeCategory = 'PCT'">WIPO Publication Number:</xsl:when><xsl:otherwise>Earliest Publication No (PGPUB):</xsl:otherwise></xsl:choose>
 					</xsl:variable>
 
 					<xsl:variable name="pubdate">
-						<xsl:choose>
-							<xsl:when test="uscom:ApplicationTypeCategory = 'PCT'">
-								WIPO Publication Date:
-							</xsl:when>
-							<xsl:otherwise>
-								Earliest Publication Date:
-							</xsl:otherwise>
-						</xsl:choose>
+						<xsl:choose><xsl:when test="uscom:ApplicationTypeCategory = 'PCT'">WIPO Publication Date:</xsl:when><xsl:otherwise>Earliest Publication Date:</xsl:otherwise></xsl:choose>
 					</xsl:variable>
 
 					<hr />
@@ -194,8 +166,6 @@
 					</table>
 					
 				  </xsl:for-each>
-				  
-				  
 
 				  <!-- Correspondence Address -->
 				  <xsl:for-each select="uspat:PatentCaseMetadata/uspat:PartyBag/com:CorrespondenceAddress">
@@ -204,13 +174,7 @@
 						<tr><td>Name:</td><td><xsl:value-of select="com:Contact/com:Name/com:PersonName/com:PersonStructuredName/com:LastName"/></td></tr>
 						<xsl:for-each select="com:Contact/com:PostalAddressBag/com:PostalAddress/com:PostalStructuredAddress">
 							<xsl:variable name="cc">
-								<xsl:choose>
-									<xsl:when test="(com:CountryCode = 'US') or (com:CountryCode = 'null')">
-									</xsl:when>
-									<xsl:otherwise>
-										<xsl:value-of select="com:CountryCode"/>,
-									</xsl:otherwise>
-								</xsl:choose>
+								<xsl:if test="(com:CountryCode != 'US') and (com:CountryCode != 'null')"><xsl:value-of select="com:CountryCode"/>,</xsl:if>
 							</xsl:variable>
 							<tr><td>Address:</td><td><xsl:value-of select="com:AddressLineText"/>, <xsl:value-of select="com:CityName"/>, <xsl:value-of select="com:GeographicRegionName"/>, <xsl:value-of select="$cc"/><xsl:value-of select="com:PostalCode"/></td></tr>
 						</xsl:for-each>
@@ -248,7 +212,7 @@
 								<td><xsl:value-of select="uscom:DescriptionText"/></td>
 								<td><xsl:value-of select="com:ApplicationNumberText"/></td>
 								<td><xsl:value-of select="pat:FilingDate"/></td>
-								<td><xsl:value-of select="uspat:AIAIndicator"/></td>
+								<td><xsl:choose><xsl:when test="uspat:AIAIndicator = 'true'">Yes</xsl:when><xsl:otherwise>No</xsl:otherwise></xsl:choose></td>
 								<td><xsl:value-of select="pat:ParentDocumentStatusCode"/></td>
 								<td><xsl:value-of select="pat:PatentNumber"/></td>
 							</tr>
