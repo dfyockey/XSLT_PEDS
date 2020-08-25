@@ -22,6 +22,14 @@
     along with XSLT_PEDS.  If not, see <https://www.gnu.org/licenses/>.
 -->
 
+<!--
+	Technical Note:
+    This template uses (or abuses) xsl:for-each elements as an expedient
+    to establish local namespaces and thereby reduce the length of
+    select attributes. Such usage is noted by a trailing 'ns' comment.
+    It works well, but there must be a better way to accomplish this...
+-->
+
 <xsl:template match="/uspat:PatentBulkData">
 	<html>
 		
@@ -97,10 +105,10 @@
 		<body>
 			<div class="content">
 				
-				<xsl:for-each select="uspat:PatentData">
+				<xsl:for-each select="uspat:PatentData"> <!-- ns -->
 				
 				  <!-- Application Data -->
-				  <xsl:for-each select="uspat:PatentCaseMetadata">
+				  <xsl:for-each select="uspat:PatentCaseMetadata"> <!-- ns -->
 					
 					<xsl:variable name="first2file">
 						<xsl:choose><xsl:when test="uspat:FirstInventorToFileIndicator = 'true'">Yes</xsl:when><xsl:otherwise>No</xsl:otherwise></xsl:choose>
@@ -136,7 +144,7 @@
 				  </xsl:for-each>
 				  
 				  <!-- Transaction History -->
-				  <xsl:for-each select="uspat:ProsecutionHistoryDataBag">
+				  <xsl:for-each select="uspat:ProsecutionHistoryDataBag"> <!-- ns -->
 					<table class="listtbl">
 						<caption><h3>Transaction History</h3></caption>
 						<th width="20%">Date</th><th width="20%">Code</th><th width="60%">Transaction Description</th>
@@ -147,7 +155,7 @@
 				  </xsl:for-each>
 
 				  <!-- Patent Term Adjustment tab -->
-				  <xsl:for-each select="uspat:PatentTermData/uspat:PatentTermAdjustmentData">
+				  <xsl:for-each select="uspat:PatentTermData/uspat:PatentTermAdjustmentData"> <!-- ns -->
 					  
 				    <table class="blocktbl">
 						<caption><h3>Patent Term Adjustment</h3></caption>
@@ -169,7 +177,7 @@
 				  </xsl:for-each>
 
 				  <!-- Correspondence Address -->
-				  <xsl:for-each select="uspat:PatentCaseMetadata/uspat:PartyBag/com:CorrespondenceAddress">
+				  <xsl:for-each select="uspat:PatentCaseMetadata/uspat:PartyBag/com:CorrespondenceAddress"> <!-- ns -->
 					<table class="blocktbl">
 						<caption><h3>Correspondence Address</h3></caption>
 						<tr><td>Name:</td><td><xsl:value-of select="com:Contact/com:Name/com:PersonName/com:PersonStructuredName/com:LastName"/></td></tr>
@@ -184,7 +192,7 @@
 				  </xsl:for-each>
 
 				  <!-- Attorney/Agent Information -->
-				  <xsl:for-each select="uspat:PatentCaseMetadata/uspat:PartyBag/uspat:RegisteredPractitionerBag">
+				  <xsl:for-each select="uspat:PatentCaseMetadata/uspat:PartyBag/uspat:RegisteredPractitionerBag"> <!-- ns -->
 					<table class="listtbl">
 						<caption><h3>Attorney/Agent Information</h3></caption>
 						<th width="20%">Reg#</th><th width="40%">Name</th><th width="40%">Phone</th>
@@ -199,7 +207,7 @@
 				  </xsl:for-each>
 
 				  <!-- Continuity Data tab -->
-				  <xsl:for-each select="uspat:PatentCaseMetadata/uspat:RelatedDocumentData">
+				  <xsl:for-each select="uspat:PatentCaseMetadata/uspat:RelatedDocumentData"> <!-- ns -->
 
 					<table class="listtbl">
 						<caption><h3>Parent Continuity Data</h3></caption>
@@ -232,7 +240,7 @@
 				  </xsl:for-each>
 
 				  <!-- Foreign Priority tab -->
-				  <xsl:for-each select="uspat:PatentCaseMetadata/uspat:PriorityClaimBag">
+				  <xsl:for-each select="uspat:PatentCaseMetadata/uspat:PriorityClaimBag"> <!-- ns -->
 					<table class="listtbl">
 						<caption><h3>Foreign Priority</h3></caption>
 						<th width="*">Country</th><th width="33%">Priority Application Number</th><th width="33%">Priority Filing Date</th>
@@ -247,7 +255,7 @@
 				  </xsl:for-each>
 
 				  <!-- Assignments tab -->
-				  <xsl:for-each select="uspat:AssignmentDataBag">
+				  <xsl:for-each select="uspat:AssignmentDataBag"> <!-- ns -->
 					<xsl:variable name="numassigns" select="@uspat:assignmentTotalQuantity"/>
 					<xsl:for-each select="uspat:AssignmentData">
 						<table class="blocktbl">
