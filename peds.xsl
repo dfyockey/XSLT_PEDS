@@ -145,7 +145,7 @@
 							<td class="rj">Location Date:</td><td><xsl:value-of select="uscom:OfficialFileLocationDate"/></td></tr>
 						<tr>
 							<td class="rj">Confirmation Number:</td><td><xsl:value-of select="uspat:ApplicationConfirmationNumber"/></td>
-							<td class="rj"><xsl:value-of select="$pubnum"/></td><td><xsl:if test="uscom:ApplicationTypeCategory = 'PCT'">WO</xsl:if><xsl:value-of select="uspat:PatentPublicationIdentification/pat:PublicationNumber"/></td></tr>
+							<td class="rj"><xsl:value-of select="$pubnum"/></td><td><xsl:value-of select="uspat:PatentPublicationIdentification/com:IPOfficeCode"/><xsl:value-of select="uspat:PatentPublicationIdentification/pat:PublicationNumber"/></td></tr>
 						<tr>
 							<td class="rj">Attorney Docket Number:</td><td><xsl:value-of select="com:ApplicantFileReference"/></td>
 							<td class="rj"><xsl:value-of select="$pubdate"/></td><td><xsl:value-of select="uspat:PatentPublicationIdentification/com:PublicationDate"/></td></tr>
