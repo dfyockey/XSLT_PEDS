@@ -88,7 +88,7 @@
                   and combines them into one uniquely-named Html file
                   located in the XSLT_PEDS folder.
   
-     When run, the choosen unzipping script will act on the latest .zip
+     When run, the chosen unzipping script will act on the latest .zip
      file it finds in the XSLT_PEDS folder. The Html file, files, or
      folder containing Html files should appear in the XSLT_PEDS folder.
      Each of these files is formatted for viewing in any modern browser.
@@ -96,7 +96,7 @@
      Additionally, the downloaded .zip file should disappear and, if not
      already there, a zipTrash folder should appear. The unzipping
      scripts move downloaded .zip files into zipTrash upon completion.
-     The downloded .zip files are unchanged, so they can be used again if
+     The downloaded .zip files are unchanged, so they can be used again if
      desired. You can retain or delete zipTrash or its contents as you
      wish.
      
