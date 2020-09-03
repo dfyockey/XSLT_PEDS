@@ -1,4 +1,4 @@
-README for XSLT_PEDS
+# README for XSLT_PEDS
 
   Copyright © 2020 David Yockey
   
@@ -6,27 +6,36 @@ README for XSLT_PEDS
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
   
-<hr />
+---
   
-  ** Description **
+  ## Description
   
   XSLT_PEDS is a collection of scripts and XSLT formatting to facilitate
   viewing search results downloaded in XML format from the USPTO's
   Patent Examination Data System (https://ped.uspto.gov/peds/).
-  
 
-  ** Requirements & Recommendations **
-  
-  The following software is required or recommended for use with XSLT_PEDS:
-  
-    - Xalan (may be listed in package managers as 'xalan-c', required)
-    - Xerces (may be listed in package managers as 'xerces-c', required)
+  ## Requirements & Recommendations
+
+  ### Linux users
+    - Xalan (may be listed in package managers as 'xalan' or 'xalan-c', required)
     - unzip (required)
-    - zenity (recommended)
+    - zenity (recommended; omit for program feedback to appear in-terminal)
 
+  ### Windows 10 users
+    - WSL 1 or better (required)
+    - WSL-compatible Linux (required)
+    - Packages installed within Linux:
+        - Xalan (may be listed in package managers as 'xalan' or 'xalan-c', required)
+        - unzip (required)
 
-  ** Setup **
+  ### Mac OS X users
+  XSLT_PEDS is untested on OS X but may work if Xalan and unzip are provided. If you test on OS X,
+  please provide feedback about the results at https://github.com/dfyockey/XSLT_PEDS/issues so these
+  instructions may be updated accordingly.
 
+  ## Setup
+
+  ### Linux users
   Simply unzip the downloaded XSLT_PEDS zip file into folder of your choice.
 
   If you are planning to use the Gnome Files file manager (and perhaps other
@@ -42,16 +51,20 @@ README for XSLT_PEDS
     3. Click "Behavior"
     
     4. Under "Executable Text Files", select either "Run them" or
-     "Ask what to do", whichever you prefer.
+       "Ask what to do", whichever you prefer.
        
     5. Close the "Preferences" window.
     
   Note: Nothing tragic will happen if you try to run a script and the file
-  mamager isn't set up or able to do it. It'll just open a text editor
+  manager isn't set up or able to do it. It'll just open a text editor
   showing program code.
+
+  ### Windows 10 users
+    1. Move the downloaded XSLT_PEDS zip file into folder of your choice.
+    2. Run the command `unzip zipfile`,
+       where "zipfile" is the name of the downloaded XSLT_PEDS zip file.
   
-  
-  ** Usage **
+  ## Usage
   
   1. Perform a search on the USPTO's Patent Examination Data System at
   https://ped.uspto.gov/peds/.
@@ -103,5 +116,5 @@ README for XSLT_PEDS
   7. The Html files are completely portable (i.e. you can move them to
      any folder, email them to someone, etc.)
 
-<hr />
+---
 
