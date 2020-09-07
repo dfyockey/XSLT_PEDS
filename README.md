@@ -29,9 +29,10 @@
         - unzip (required)
 
   ### Mac OS X users
-  XSLT_PEDS is untested on OS X but may work if Xalan and unzip are provided. If you test on OS X,
-  please provide feedback about the results at https://github.com/dfyockey/XSLT_PEDS/issues so these
-  instructions may be updated accordingly.
+  XSLT_PEDS is untested on OS X but may work if Xalan and unzip are provided.
+  If you test on OS X, please provide feedback about the results at
+  https://github.com/dfyockey/XSLT_PEDS/issues so these instructions may be
+  updated accordingly.
 
   ## Setup
 
@@ -106,15 +107,23 @@
      alternatively be provided as an argument when running from the
      command line.
      
-  5. Open one of the generated Html files to view the formatted PEDS data.
+  5. Open the generated Html files to view the formatted PEDS data.
+
+  ## Tips
   
-  6. Depending on the file manager used, you may be able to select
+  1. As of XSLT_PEDS version 1.1.0, you may click on any application title
+     in a generated Html file to hide all data sections in the file except
+     Application Data sections. Clicking any application title again will
+     show the hidden sections. This feature can be useful in browsing
+     through a large collection of results to find applications of interest.
+
+  2. Depending on the file manager used, you may be able to select
      multiple generated Html files and hit "Enter" -- or open a context
      menu (i.e. "right-click menu") and click "Open" -- to open the files
      in a collection of (randomly-ordered) tabs.
-  
-  7. The Html files are completely portable (i.e. you can move them to
-     any folder, email them to someone, etc.)
+
+  3. The Html files are completely portable; i.e. you can move them to
+     any folder, email them to someone, etc.
 
 ---
 
