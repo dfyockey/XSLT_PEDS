@@ -32,6 +32,32 @@
 	<html>
 		
 		<head>
+
+			<script language="javascript">
+
+				function toggleDetails(mouseevent) {
+					var d, i, t;
+
+					// Align clicked application title to top of viewport
+					t = document.getElementById("trailer");
+					t.style.height = screen.height;
+					t.style.display = "block";
+					window.scrollBy(0, (mouseevent.clientY - mouseevent.offsetY));
+					t.style.display = "none";
+
+					// Show/hide applications' data blocks except Application Data
+					d = document.querySelectorAll(".details");
+					for (i = 0; i &lt; d.length; i++) {
+						if (d[i].style.display === "none") {
+							d[i].style.display = "block";
+						} else {
+							d[i].style.display = "none";
+						}
+					}
+				}
+
+			</script>
+
 			<style type="text/css">
 				body {
 					font-family:sans-serif;
@@ -97,6 +123,15 @@
 					.grayrow {
 						background-color:#f8f8f8;
 					}
+
+					.details {
+						display:block;
+					}
+
+					#trailer {
+						height:1000px;
+						display:none;
+					}
 			</style>
 		</head>
 		
@@ -105,16 +140,19 @@
 				
 				<xsl:for-each select="uspat:PatentData">
 					<xsl:apply-templates select="uspat:PatentCaseMetadata"/>												<!-- Application Data			-->
-				    <xsl:apply-templates select="uspat:ProsecutionHistoryDataBag"/>											<!-- Transaction History		-->
-				    <xsl:apply-templates select="uspat:PatentTermData/uspat:PatentTermAdjustmentData"/>						<!-- Patent Term Adjustment		-->
-				    <xsl:apply-templates select="uspat:PatentCaseMetadata/uspat:PartyBag/com:CorrespondenceAddress"/>		<!-- Correspondence Address		-->
-				    <xsl:apply-templates select="uspat:PatentCaseMetadata/uspat:PartyBag/uspat:RegisteredPractitionerBag"/>	<!-- Attorney/Agent Information -->
-				    <xsl:apply-templates select="uspat:PatentCaseMetadata/uspat:RelatedDocumentData"/>						<!-- Continuity Data			-->
-				    <xsl:apply-templates select="uspat:PatentCaseMetadata/uspat:PriorityClaimBag"/>							<!-- Foreign Priority			-->
-				    <xsl:apply-templates select="uspat:AssignmentDataBag"/>													<!-- Assignments				-->
+					<div class="details">
+						<xsl:apply-templates select="uspat:ProsecutionHistoryDataBag"/>											<!-- Transaction History		-->
+						<xsl:apply-templates select="uspat:PatentTermData/uspat:PatentTermAdjustmentData"/>						<!-- Patent Term Adjustment		-->
+						<xsl:apply-templates select="uspat:PatentCaseMetadata/uspat:PartyBag/com:CorrespondenceAddress"/>		<!-- Correspondence Address		-->
+						<xsl:apply-templates select="uspat:PatentCaseMetadata/uspat:PartyBag/uspat:RegisteredPractitionerBag"/>	<!-- Attorney/Agent Information -->
+						<xsl:apply-templates select="uspat:PatentCaseMetadata/uspat:RelatedDocumentData"/>						<!-- Continuity Data			-->
+						<xsl:apply-templates select="uspat:PatentCaseMetadata/uspat:PriorityClaimBag"/>							<!-- Foreign Priority			-->
+						<xsl:apply-templates select="uspat:AssignmentDataBag"/>													<!-- Assignments				-->
+				    </div>
 				</xsl:for-each>
 				
 				<hr />
+				<div id="trailer"></div>
 			</div>
 		</body>
 		
@@ -142,7 +180,7 @@
 	</xsl:variable>
 
 	<hr />
-	<h2 class="doctitle"><xsl:value-of select="pat:InventionTitle"/></h2>
+	<h2 class="doctitle" onclick="toggleDetails(event)"><xsl:value-of select="pat:InventionTitle"/></h2>
 	<table class="blocktbl">
 		<!-- AFAIK, values for the International Reg No and Reg Pub Date in this table apparently may only appear in design patents -->
 		<caption><h3>Application Data</h3></caption>
