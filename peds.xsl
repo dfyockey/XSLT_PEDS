@@ -35,25 +35,45 @@
 
 			<script language="javascript">
 
-				function toggleDetails(mouseevent) {
-					var d, i, t;
-
-					// Align clicked application title to top of viewport
-					t = document.getElementById("trailer");
+				// Utility to align an element to the top of the viewport
+				function alignClickedTitleToTop(e) {
+					var t = document.getElementById("trailer");
 					t.style.height = screen.height;
 					t.style.display = "block";
-					window.scrollBy(0, (mouseevent.clientY - mouseevent.offsetY));
+					e.scrollIntoView(true);
 					t.style.display = "none";
+				}
 
-					// Show/hide applications' data blocks except Application Data
+				// Utility to show/hide an element
+				function toggleElement(e) {
+					if (e.style.display === "none") {
+						e.style.display = "block";
+					} else {
+						e.style.display = "none";
+					}
+				}
+
+				// Show/hide all applications' info, including title, except that having the clicked-on title
+				function toggleOtherApplications(mouseevent) {
+					var d, i;
+					d = document.querySelectorAll(".application");
+					for (i = 0; i &lt; d.length; i++) {
+						if (d[i] !== mouseevent.target.parentElement)
+							toggleElement(d[i]);
+					}
+
+					alignClickedTitleToTop(mouseevent.target);
+				}
+
+				// Show/hide applications' data blocks except Application Data
+				function toggleDetails(mouseevent) {
+					var d, i;
 					d = document.querySelectorAll(".details");
 					for (i = 0; i &lt; d.length; i++) {
-						if (d[i].style.display === "none") {
-							d[i].style.display = "block";
-						} else {
-							d[i].style.display = "none";
-						}
+						toggleElement(d[i]);
 					}
+
+					alignClickedTitleToTop(mouseevent.target.parentNode.parentNode.previousElementSibling);
 				}
 
 			</script>
@@ -139,6 +159,7 @@
 			<div class="content">
 				
 				<xsl:for-each select="uspat:PatentData">
+				  <div class="application">
 					<xsl:apply-templates select="uspat:PatentCaseMetadata"/>												<!-- Application Data			-->
 					<div class="details">
 						<xsl:apply-templates select="uspat:ProsecutionHistoryDataBag"/>											<!-- Transaction History		-->
@@ -149,6 +170,7 @@
 						<xsl:apply-templates select="uspat:PatentCaseMetadata/uspat:PriorityClaimBag"/>							<!-- Foreign Priority			-->
 						<xsl:apply-templates select="uspat:AssignmentDataBag"/>													<!-- Assignments				-->
 				    </div>
+				  </div>
 				</xsl:for-each>
 				
 				<hr />
@@ -180,10 +202,10 @@
 	</xsl:variable>
 
 	<hr />
-	<h2 class="doctitle" onclick="toggleDetails(event)"><xsl:value-of select="pat:InventionTitle"/></h2>
+	<h2 class="doctitle" onclick="toggleOtherApplications(event)"><xsl:value-of select="pat:InventionTitle"/></h2>
 	<table class="blocktbl">
 		<!-- AFAIK, values for the International Reg No and Reg Pub Date in this table apparently may only appear in design patents -->
-		<caption><h3>Application Data</h3></caption>
+		<caption onclick="toggleDetails(event)"><h3>Application Data</h3></caption>
 		<tr>
 			<td class="rj" width="25%">Application Number:</td><td width="25%"><xsl:value-of select="uscom:ApplicationNumberText"/></td>
 			<td class="rj" width="25%">Correspondence Address Customer Number:</td><td width="25%"><xsl:value-of select="uspat:PartyBag/com:CorrespondenceAddress/com:PartyIdentifier"/></td></tr>

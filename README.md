@@ -109,21 +109,28 @@
      
   5. Open the generated Html files to view the formatted PEDS data.
 
-  ## Tips
+  ## Viewing Options
   
-  1. As of XSLT_PEDS version 1.1.0, you may click on any application title
-     in a generated Html file to hide all data sections in the file except
-     Application Data sections. Clicking any application title again will
-     show the hidden sections. This feature can be useful in browsing
-     through a large collection of results to find applications of interest.
+  1. Click any Application Data heading in a generated Html file to hide
+     all data sections in the file *except* Application Data sections. Click
+     any Application Data heading again to show the hidden sections. This
+     feature can be useful in browsing through a large collection of
+     results to find applications of interest.
+     
+  2. Click any application title in a generated Html file to hide all
+     *other* information in the file except that for the clicked title.
+     Click the one remaining application title again to show the hidden
+     information for the other titles. This feature can be useful for
+     printing information for a single application to paper or PDF.
+  
+  ## Tips
 
-  2. Depending on the file manager used, you may be able to select
+  1. Depending on the file manager used, you may be able to select
      multiple generated Html files and hit "Enter" -- or open a context
      menu (i.e. "right-click menu") and click "Open" -- to open the files
      in a collection of (randomly-ordered) tabs.
 
-  3. The Html files are completely portable; i.e. you can move them to
+  2. The Html files are completely portable; i.e. you can move them to
      any folder, email them to someone, etc.
 
 ---
-
