@@ -122,7 +122,13 @@
      Click the one remaining application title again to show the hidden
      information for the other titles. This feature can be useful for
      printing information for a single application to paper or PDF.
-  
+
+  ## Upgrading to Latest Release
+
+     To upgrade to the latest release of XSLT_PEDS, rename or delete the
+     current XSLT_PEDS folder and replace it by unzipping the new release
+     zip file as described in the **Setup** section above.
+
   ## Tips
 
   1. Depending on the file manager used, you may be able to select
