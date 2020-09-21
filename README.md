@@ -125,9 +125,9 @@
 
   ## Upgrading to Latest Release
 
-     To upgrade to the latest release of XSLT_PEDS, rename or delete the
-     current XSLT_PEDS folder and replace it by unzipping the new release
-     zip file as described in the **Setup** section above.
+  To upgrade to the latest release of XSLT_PEDS, rename or delete the
+  current XSLT_PEDS folder and replace it by unzipping the new release
+  zip file as described in the **Setup** section above.
 
   ## Tips
 
