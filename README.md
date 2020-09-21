@@ -61,9 +61,11 @@
   showing program code.
 
   ### Windows 10 users
-    1. Move the downloaded XSLT_PEDS zip file into folder of your choice.
-    2. Run the command `unzip zipfile`,
-       where "zipfile" is the name of the downloaded XSLT_PEDS zip file.
+  
+  1. Move the downloaded XSLT_PEDS zip file into folder of your choice.
+  
+  2. Run the command `unzip zipfile`, where "zipfile" is the name of the
+     downloaded XSLT_PEDS zip file.
   
   ## Usage
   
