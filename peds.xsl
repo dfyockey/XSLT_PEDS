@@ -231,17 +231,20 @@
 			<td class="rj">Class / Subclass:</td><td><xsl:value-of select="pat:PatentClassificationBag/pat:NationalClassification/pat:MainNationalClassification/pat:NationalClass"/>/<xsl:value-of select="pat:PatentClassificationBag/pat:NationalClassification/pat:MainNationalClassification/pat:NationalSubclass"/></td>
 			<td class="rj">Patent Number:</td><td><xsl:value-of select="uspat:PatentGrantIdentification/pat:PatentNumber"/></td></tr>
 		<tr>
-			<td class="rj">Inventors:</td><td><xsl:for-each select="uspat:PartyBag/pat:InventorBag/pat:Inventor"><xsl:value-of select="com:PublicationContact/com:Name/com:PersonName/com:PersonStructuredName/com:FirstName"/>&#160;<xsl:if test="com:PublicationContact/com:Name/com:PersonName/com:PersonStructuredName/com:MiddleName != ''"><xsl:value-of select="com:PublicationContact/com:Name/com:PersonName/com:PersonStructuredName/com:MiddleName"/>&#160;</xsl:if><xsl:value-of select="com:PublicationContact/com:Name/com:PersonName/com:PersonStructuredName/com:LastName"/><br /></xsl:for-each></td>
+			<td class="rj"></td><td></td>
 			<td class="rj">Issue Date of Patent:</td><td><xsl:value-of select="uspat:PatentGrantIdentification/pat:GrantDate"/></td></tr>
-		<tr>
-			<td class="rj">First Named Applicant:</td><td><xsl:value-of select="uspat:PartyBag/pat:ApplicantBag/pat:Applicant/com:PublicationContact/com:Name/com:OrganizationName/com:OrganizationStandardName"/></td>
-			<td class="rj">AIA (First Inventor to File):</td><td><xsl:value-of select="$first2file"/></td></tr>
+		<tr class="grayrow">
+			<td class="rj">Inventors:</td><td colspan="3"><div style="display:inline-block; float:left; margin-right:1em;"><xsl:for-each select="uspat:PartyBag/pat:InventorBag/pat:Inventor"><xsl:value-of select="com:PublicationContact/com:Name/com:PersonName/com:PersonStructuredName/com:FirstName"/>&#160;<xsl:if test="com:PublicationContact/com:Name/com:PersonName/com:PersonStructuredName/com:MiddleName != ''"><xsl:value-of select="com:PublicationContact/com:Name/com:PersonName/com:PersonStructuredName/com:MiddleName"/>&#160;</xsl:if><xsl:value-of select="com:PublicationContact/com:Name/com:PersonName/com:PersonStructuredName/com:LastName"/><br /></xsl:for-each></div><div style="display:inline-block; width=100%;"><xsl:for-each select="uspat:PartyBag/pat:InventorBag/pat:Inventor"><xsl:value-of select="com:PublicationContact/com:CityName"/><xsl:if test="com:PublicationContact/com:GeographicRegionName != ''">, <xsl:value-of select="com:PublicationContact/com:GeographicRegionName"/></xsl:if><xsl:if test="com:PublicationContact/com:CountryCode != ''">, <xsl:value-of select="com:PublicationContact/com:CountryCode"/></xsl:if><br /></xsl:for-each></div></td>
+			</tr>
+		<tr class="grayrow">
+			<td class="rj">Applicants:</td><td colspan="3"><div style="display:inline-block; float:left; margin-right:1em;"><xsl:for-each select="uspat:PartyBag/pat:ApplicantBag/pat:Applicant"><xsl:value-of select="com:PublicationContact/com:Name/com:OrganizationName/com:OrganizationStandardName"/><br /></xsl:for-each></div><div style="display:inline-block; width=100%;"><xsl:for-each select="uspat:PartyBag/pat:ApplicantBag/pat:Applicant"><xsl:value-of select="com:PublicationContact/com:CityName"/><xsl:if test="com:PublicationContact/com:GeographicRegionName != ''">, <xsl:value-of select="com:PublicationContact/com:GeographicRegionName"/></xsl:if><xsl:if test="com:PublicationContact/com:CountryCode != ''">, <xsl:value-of select="com:PublicationContact/com:CountryCode"/></xsl:if><br /></xsl:for-each></div></td>
+			</tr>
 		<tr>
 			<td class="rj">International Registration Number (Hague):</td><td><xsl:value-of select="com:HagueAgreementData/com:InternationalRegistrationNumber"/></td>
-			<td class="rj">Entity Status:</td><td><xsl:value-of select="uscom:BusinessEntityStatusCategory"/></td></tr>
+			<td class="rj">AIA (First Inventor to File):</td><td><xsl:value-of select="$first2file"/></td></tr>
 		<tr>
 			<td class="rj">International Registration Publication Date:</td><td><xsl:value-of select="com:HagueAgreementData/com:InternationalRegistrationPublicationDate"/></td>
-			<td></td></tr>
+			<td class="rj">Entity Status:</td><td><xsl:value-of select="uscom:BusinessEntityStatusCategory"/></td></tr>
 	</table>
 
 </xsl:template>
@@ -440,21 +443,18 @@
 			<xsl:for-each select="pat:AssigneeBag/pat:Assignee">
 				<tr>
 					<td class="rj"><xsl:if test="position() = 1">Assignee:</xsl:if></td>
-					<td>
+					<td colspan="3">
 						<xsl:value-of select="com:Contact/com:Name"/><br />
 						<xsl:for-each select="com:Contact/com:PostalAddressBag/com:PostalAddress/com:PostalAddressText"><xsl:value-of select="."/><br />
 						</xsl:for-each></td>
-					<td class="rj"></td>
-					<td></td>
 				</tr></xsl:for-each>
 			<tr class="grayrow">
 				<td class="rj">Correspondent:</td>
-				<td>
+				<td colspan="3">
 					<xsl:value-of select="com:CorrespondenceAddress/com:Contact/com:Name"/><br />
 					<xsl:for-each select="com:CorrespondenceAddress/com:Contact/com:PostalAddressBag/com:PostalAddress/com:PostalAddressText"><xsl:value-of select="."/><br />
 					</xsl:for-each></td>
-				<td class="rj"></td>
-				<td></td></tr>
+				</tr>
 		</table>
 	</xsl:for-each>
 </xsl:template>
