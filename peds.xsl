@@ -141,7 +141,7 @@
 					}
 
 					.grayrow {
-						background-color:#f8f8f8;
+						background-color:#ececec;
 					}
 
 					.details {
