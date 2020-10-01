@@ -65,6 +65,7 @@ if [ ! -f "$lastarg" ]
 		zipfile=$latest
 	else
 		zipfile=$lastarg
+		fziparg="true"
 fi
 
 # If no zip file if given, try and use the latest zip file in the current directory
@@ -176,11 +177,14 @@ esac
 
 
 # Cleanup
-if [ ! -d ./zipTrash ]
+if [ -n $fziparg ]
 	then
-		mkdir zipTrash
+		if [ ! -d ./zipTrash ]
+			then
+				mkdir zipTrash
+		fi
+		mv $zipfile ./zipTrash
 fi
-mv $zipfile ./zipTrash
 
 # Done
 msg="$proc done."
