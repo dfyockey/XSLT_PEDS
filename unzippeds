@@ -36,19 +36,39 @@ function xhTransform () {
 	xsltproc "$htmlname" "$file" "peds.xsl"
 }
 
+function usage () {
+	echo
+	echo "Usage: unzippeds OPTION [ZIPFILE]"
+	echo
+	echo -e "  -a  Unzips a PEDS collection of Xml files to the current folder\n      while insuring that each file has unique name."
+	echo
+	echo -e "  -f  Unzips a PEDS collection of Xml files to a folder\n      while insuring that the folder is uniquely named."
+    echo
+    echo -e "  -o  Unzips a PEDS collection of Xml files and combines them\n      into one uniquely-named Xml file."
+    echo
+    echo "  -?, -h  Show this usage information."
+    echo
+}
+
 #
 
-proc="unzipa"
 while getopts :afo opt
 do
 	case $opt in
-		a)	proc="unzipa" ;;
-		f)	proc="unzipf" ;;
-		o)	proc="unzipo" ;;
-		\?)	echo -e "Invalid option -$OPTARG ignored."
-		    exit 3 ;;
+		a)		proc="unzipa" ;;
+		f)		proc="unzipf" ;;
+		o)		proc="unzipo" ;;
+		?|h)	usage
+				exit 0 ;;
 	esac
 done
+
+if [ -z $proc ]
+	then
+		echo -e "\n$0: An option is required."
+		usage
+		exit 0;
+fi
 
 # Get the last argument passed to the script.
 # From https://www.cyberciti.biz/faq/linux-unix-bsd-apple-osx-bash-get-last-argument/ (retreived 20200930)
