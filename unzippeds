@@ -52,7 +52,7 @@ function usage () {
 
 #
 
-while getopts :afo opt
+while getopts :afo?h opt
 do
 	case $opt in
 		a)		proc="unzipa" ;;
@@ -74,22 +74,39 @@ fi
 # From https://www.cyberciti.biz/faq/linux-unix-bsd-apple-osx-bash-get-last-argument/ (retreived 20200930)
 for lastarg in $@; do :; done
 
-# If no file if given, try and use the latest zip file in the current directory
-# - Based on info from http://mywiki.wooledge.org/BashFAQ/003 (retrieved 202008??)
-if [ -z "$lastarg" ]
+# Check for zip file
+## `file` kept failing when combining conditions in single tests :(
+fzip="F"		# Flag indicating if a valid zip file is available to process
+fziparg="F"		# Flag indicating if the zip file was provided as an argument
+if [ -f "$lastarg" ]
 	then
-		for file in ./*.zip
-			do
-				[[ $file -nt $latest ]] && latest=$file
-			done
-		zipfile=$latest
-	else
-		zipfile=$lastarg
-		fziparg="true"
+		if [ "$(file -b --mime-type "$lastarg")" = "application/zip" ]
+			then
+				fzip="T"
+				fziparg="T"
+				zipfile=$lastarg
+		fi
+	elif [[ "$lastarg" = -* ]]
+		then
+			# Find latest zip file in the current directory
+			# - Based on info from http://mywiki.wooledge.org/BashFAQ/003 (retrieved 202008??)
+			for file in ./*.zip
+				do
+					[[ $file -nt $latest ]] && latest=$file
+				done
+
+			if [ -f "$latest" ]
+				then
+					if [ "$(file -b --mime-type "$latest")" = "application/zip" ]
+						then
+							fzip="T"
+							fziparg="F"
+							zipfile=$latest
+					fi
+			fi
 fi
 
-# Check for zip file
-if [ ! -f "$zipfile" -o "$(file -b --mime-type "$zipfile")" != "application/zip" ]
+if [ "$fzip" = "F" ]
 	then
 		errmsg="No zip file found.\nPlease make sure a zip file is located in your XSLT_PEDS folder\nor provide a zip file name on the command line."
 		if [ -e "/usr/bin/zenity" ]
@@ -101,7 +118,7 @@ if [ ! -f "$zipfile" -o "$(file -b --mime-type "$zipfile")" != "application/zip"
 		exit 1
 fi
 
-# Check for XSLT processor including from within WSL, Cygwin, and (untested) MSYS2
+# Check for XSLT processor including from within Linux, WSL, Cygwin, and (untested) MSYS2
 if [ ! -e "/usr/bin/Xalan" -a ! -e "/mnt/c/windows/system32/msxsl.exe" -a ! -e "/cygdrive/c/windows/system32/msxsl.exe" -a ! -e "/c/windows/system32/msxsl.exe" ]
 	then
 		echo -e "No XSLT processor found.\nPlease install Xalan or MSXSL.\n(For MSXSL: msxsl.exe must be placed in C:\Windows\System32)"
@@ -182,9 +199,8 @@ case $proc in
 		rm -f $newfile ;;
 esac
 
-
 # Cleanup
-if [ -n $fziparg ]
+if [ "$fziparg" = "F" ]
 	then
 		if [ ! -d ./zipTrash ]
 			then
