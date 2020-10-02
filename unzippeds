@@ -76,7 +76,7 @@ for lastarg in $@; do :; done
 
 # If no file if given, try and use the latest zip file in the current directory
 # - Based on info from http://mywiki.wooledge.org/BashFAQ/003 (retrieved 202008??)
-if [ ! -f "$lastarg" ]
+if [ -z "$lastarg" ]
 	then
 		for file in ./*.zip
 			do
@@ -88,21 +88,8 @@ if [ ! -f "$lastarg" ]
 		fziparg="true"
 fi
 
-# If no zip file if given, try and use the latest zip file in the current directory
-# - Based on info from http://mywiki.wooledge.org/BashFAQ/003 (retrieved 202008??)
-#if [ -z "$1" ]
-#	then
-#		for file in ./*.zip
-#			do
-#				[[ $file -nt $latest ]] && latest=$file
-#			done
-#		zipfile=$latest
-#	else
-#		zipfile=$1
-#fi
-
 # Check for zip file
-if [ ! -f "$zipfile" -o $(file -b --mime-type "$zipfile") != "application/zip" ]
+if [ ! -f "$zipfile" -o "$(file -b --mime-type "$zipfile")" != "application/zip" ]
 	then
 		errmsg="No zip file found.\nPlease make sure a zip file is located in your XSLT_PEDS folder\nor provide a zip file name on the command line."
 		if [ -e "/usr/bin/zenity" ]
