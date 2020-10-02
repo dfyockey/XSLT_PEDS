@@ -57,7 +57,8 @@ do
 	case $opt in
 		a)		proc="unzipa" ;;
 		f)		proc="unzipf" ;;
-		o)		proc="unzipo" ;;
+		o)		proc="unzipo"
+				firstfile=1 ;;
 		?|h)	usage
 				exit 0 ;;
 	esac
@@ -155,7 +156,7 @@ for file in $newdir/*.xml
 				xhTransform
 				rm -f "$file" ;;
 			unzipo)
-				if [ "$firstfile" -eq 1 ]
+				if [ "$firstfile" -eq 1 ]	# Originally set up in the `getopts` while loop
 					then
 						# For the first file, do nothing but clear a flag...
 						firstfile=0
@@ -193,6 +194,7 @@ case $proc in
 		# Generate unique name for new html file - Based on answer https://stackoverflow.com/a/1224786/8100489 (as edited Sep 14 '17 at 11:59)
 		htmlname="$(basename -s .xml "$newfile").peds.htm"
 
+		file="$newfile"		# Set $file so it's available within xhTransform
 		xhTransform
 
 		rm -rf $newdir
