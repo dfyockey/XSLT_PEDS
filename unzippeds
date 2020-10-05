@@ -23,7 +23,7 @@ function xsltproc () {
 	if [ -e "/usr/bin/Xalan" ]
 		then
 			Xalan -o "$1" "$2" "$3"
-		elif [ -e "/mnt/c/windows/system32/msxsl.exe" -o -e "/cygdrive/c/windows/system32/msxsl.exe" -o -e "/c/windows/system32/msxsl.exe" ]	# Checks from WSL, Cygwin, and (untested) MSYS2
+		elif [ -e "/mnt/c/windows/system32/msxsl.exe" -o -e "/cygdrive/c/windows/system32/msxsl.exe" ]	# Checks from WSL and Cygwin
 		then
 			msxsl.exe -o "$1" "$2" "$3"
 		else
@@ -119,8 +119,8 @@ if [ "$fzip" = "F" ]
 		exit 1
 fi
 
-# Check for XSLT processor including from within Linux, WSL, Cygwin, and (untested) MSYS2
-if [ ! -e "/usr/bin/Xalan" -a ! -e "/mnt/c/windows/system32/msxsl.exe" -a ! -e "/cygdrive/c/windows/system32/msxsl.exe" -a ! -e "/c/windows/system32/msxsl.exe" ]
+# Check for XSLT processor including from within Linux, WSL, and Cygwin
+if [ ! -e "/usr/bin/Xalan" -a ! -e "/mnt/c/windows/system32/msxsl.exe" -a ! -e "/cygdrive/c/windows/system32/msxsl.exe" ]
 	then
 		echo -e "No XSLT processor found.\nPlease install Xalan or MSXSL.\n(For MSXSL: msxsl.exe must be placed in C:\Windows\System32)"
 		exit 2
