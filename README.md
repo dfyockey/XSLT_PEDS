@@ -80,7 +80,7 @@
        
     5. Close the "Preferences" window.
     
-  Note: Nothing tragic will happen if you try to run a script and the file
+  _Note:_ Nothing tragic will happen if you try to run a script and the file
   manager isn't set up or able to do it. It'll just open a text editor
   showing program code.
 
@@ -139,6 +139,11 @@
      upon completion.
      
   5. Open the generated Html files to view the formatted PEDS data.
+  
+  _Note for Technical Users:_ `unzippeds` is run be each of the aforementioned
+  scripts to perform their operations. It may be used directly or within a script
+  to perform any of those operations by providing an appropriate argument.
+  Run `unzippeds -?` for usage information.
 
   ## Viewing Options
   
