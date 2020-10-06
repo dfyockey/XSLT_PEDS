@@ -21,38 +21,38 @@
   All recommendations & requirements are available cost-free.
 
   ### Linux users
-    - Xalan (required; listed in package managers as 'xalan' or 'xalan-c')
-    - unzip (required)
-    - zenity (recommended; omit for program feedback to appear in-terminal)
+   - Xalan (required; listed in package managers as 'xalan' or 'xalan-c')
+   - unzip (required)
+   - zenity (recommended; omit for program feedback to appear in-terminal)
 
   ### Microsoft Windows 10 users
-    - Windows Subsystem for Linux (WSL 1 or 2 is required; WSL 1 is recommended for setup simplicity)
-    - WSL-compatible Linux (required; the latest LTS (long-term support) version of Ubuntu is recommended)
-    - Packages installed within WSL-compatible Linux:
-        - Xalan (required; e.g. to install in Ubuntu, run the command `sudo apt-get install xalan`)
-        - unzip (required; e.g. to install in Ubuntu, run the command `sudo apt-get install unzip`)
+   - Windows Subsystem for Linux (WSL 1 or 2 is required; WSL 1 is recommended for setup simplicity)
+   - WSL-compatible Linux (required; the latest LTS (long-term support) version of Ubuntu is recommended)
+   - Packages installed within WSL-compatible Linux:
+     - Xalan (required; e.g. to install in Ubuntu, run the command `sudo apt-get install xalan`)
+     - unzip (required; e.g. to install in Ubuntu, run the command `sudo apt-get install unzip`)
 
-    For detailed WSL setup information from Microsoft, please see:
-    - [Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+   For detailed WSL setup information from Microsoft, please see:
+   - [Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 
   ### Microsoft Windows 10, 8.1, 8, 7, or Vista users
   Windows 10 users may prefer the following configuration if they already use Cygwin for other purposes.
   XSLT_PEDS is untested on Windows prior to 10, but may work with this arrangement as well. If you test on
   Windows prior to 10, please provide feedback about the results at https://github.com/dfyockey/XSLT_PEDS/issues
   so these instructions may be updated accordingly.
-    - Cygwin (required)
-        - sed (required; select in Cygwin setup)
-        - unzip (required; select in Cygwin setup)
-    - MSXML 6.0
-        (msxml6.msi required for 32-bit PCs)
-        (msxml6_x64.msi required for most 64-bit PCs)
-        (msxml6_ia64.msi required for 64-bit PCs with Itanium processors)
-    - MSXSL (`msxsl.exe` required; should be placed in C:\Windows\System32)
+   - Cygwin (required)
+     - sed (required; select in Cygwin setup)
+     - unzip (required; select in Cygwin setup)
+   - MSXML 6.0
+       (msxml6.msi required for 32-bit PCs)
+       (msxml6_x64.msi required for most 64-bit PCs)
+       (msxml6_ia64.msi required for 64-bit PCs with Itanium processors)
+   - MSXSL (`msxsl.exe` required; should be placed in C:\Windows\System32)
 
-    For downloads and more information please see:
-    - [Cygwin](https://www.cygwin.com/)
-    - [Microsoft Core XML Services (MSXML) 6.0](https://www.microsoft.com/en-us/download/details.aspx?id=3988)
-    - [Command Line Transformation Utility (msxsl.exe)](https://www.microsoft.com/en-us/download/details.aspx?id=21714)
+   For downloads and more information please see:
+   - [Cygwin](https://www.cygwin.com/)
+   - [Microsoft Core XML Services (MSXML) 6.0](https://www.microsoft.com/en-us/download/details.aspx?id=3988)
+   - [Command Line Transformation Utility (msxsl.exe)](https://www.microsoft.com/en-us/download/details.aspx?id=21714)
 
   ### Mac OS X users
   XSLT_PEDS is untested on OS X but may work if Xalan and unzip are provided.
