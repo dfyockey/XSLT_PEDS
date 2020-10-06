@@ -26,6 +26,7 @@
    - zenity (recommended; omit for program feedback to appear in-terminal)
 
   ### Microsoft Windows 10 users
+   - At a minimum, familiarity with Linux commands `ls` and `cd` is recommended to facilitate usage.
    - Windows Subsystem for Linux (WSL 1 or 2 is required; WSL 1 is recommended for setup simplicity)
    - WSL-compatible Linux (required; the latest LTS (long-term support) version of Ubuntu is recommended)
    - Packages installed within WSL-compatible Linux:
@@ -40,6 +41,7 @@
   XSLT_PEDS is untested on Windows prior to 10, but may work with this arrangement as well. If you test on
   Windows prior to 10, please provide feedback about the results at https://github.com/dfyockey/XSLT_PEDS/issues
   so these instructions may be updated accordingly.
+   - At a minimum, familiarity with Linux commands `ls` and `cd` is recommended to facilitate usage.
    - Cygwin (required)
      - sed (required; select in Cygwin setup)
      - unzip (required; select in Cygwin setup)
@@ -86,11 +88,19 @@
 
   ### Windows users
   
-  1. Move the downloaded XSLT_PEDS zip file into folder of your choice.
+  1. Move the downloaded XSLT_PEDS zip file into your WSL or Cygwin
+  home folder.
+    - The WSL home folder is accessible by running the Linux installed in WSL
+    (e.g. Ubuntu), and from there running `explorer.exe .` (be sure to include
+    the space and dot following `exe`). The folder will open in Windows Explorer.
+    If should have the same name as your Linux username.
+    - The Cygwin home folder is in `C:\cygwin32\home\<user>` where, by default,
+    `<user>` is your Windows username.
   
-  2. Extract the contents of the zip file into your chosen folder; if the
-  destination folder suggested by Windows ends with the name of the zip file,
-  delete the zip file name from the indicated destination folder before extracting.
+  2. From within WSL or Cygwin, run the command `unzip zipfile`, where `zipfile`
+  is the name of the downloaded XSLT_PEDS zip file. DO NOT unzip using
+  Windows Explorer's "Extract" function! ("Extract" will mess up the Linux
+  file permissions so that they won't run.)
 
   ## Usage
   
@@ -118,9 +128,9 @@
 
      In Linux, the unzipping scripts may be run either from a file manager
      or the command line. In Windows, the unzipping scripts will only run
-     from the command line within WSL or Cygwin. In either case, a script
-     name must be preceded by `./` (e.g. `./unzipa`) when run from the
-     command line.
+     from the command line within WSL or Cygwin. When running from the
+     command line in either case, a script must be run from the XSLT_PEDS
+     folder and its name must be preceded by `./` (e.g. `./unzipa`).
 
      When run, the chosen unzipping script will act on the latest .zip
      file it finds in the XSLT_PEDS folder. The Html file, files, or
