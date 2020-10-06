@@ -43,10 +43,7 @@
    - Cygwin (required)
      - sed (required; select in Cygwin setup)
      - unzip (required; select in Cygwin setup)
-   - MSXML 6.0
-       (msxml6.msi required for 32-bit PCs)
-       (msxml6_x64.msi required for most 64-bit PCs)
-       (msxml6_ia64.msi required for 64-bit PCs with Itanium processors)
+   - MSXML 6.0 (`msxml6.msi` required for 32-bit PCs; `msxml6_x64.msi` required for most 64-bit PCs; `msxml6_ia64.msi` required for 64-bit PCs with Itanium processors)
    - MSXSL (`msxsl.exe` required; should be placed in C:\Windows\System32)
 
    For downloads and more information please see:
