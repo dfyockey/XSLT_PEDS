@@ -88,19 +88,19 @@
 
   ### Windows users
   
-  1. Move the downloaded XSLT_PEDS zip file into your WSL or Cygwin
+  1. Move the downloaded XSLT_PEDS zip file into your WSL Linux or Cygwin
   home folder.
-    - The WSL home folder is accessible by running the Linux installed in WSL
-    (e.g. Ubuntu), and from there running `explorer.exe .` (be sure to include
-    the space and dot following `exe`). The folder will open in Windows Explorer.
-    If should have the same name as your Linux username.
-    - The Cygwin home folder is in `C:\cygwin32\home\<user>` where, by default,
+  - The WSL Linux home folder is accessible by running WSL Linux (e.g. Ubuntu),
+    and from there running `explorer.exe .` (be sure to include the space and
+    the dot following `explorer.exe`). The folder will open in Windows Explorer.
+    It should have the same name as your WSL Linux username.
+  - The Cygwin home folder is in `C:\cygwin32\home\<user>` where, by default,
     `<user>` is your Windows username.
   
-  2. From within WSL or Cygwin, run the command `unzip zipfile`, where `zipfile`
-  is the name of the downloaded XSLT_PEDS zip file. DO NOT unzip using
-  Windows Explorer's "Extract" function! ("Extract" will mess up the Linux
-  file permissions so that they won't run.)
+  2. From within WSL Linux or Cygwin, run the command `unzip zipfile`, where
+  `zipfile` is the name of the downloaded XSLT_PEDS zip file. DO NOT unzip
+  using Windows Explorer's "Extract" function! ("Extract" will mess up the
+  Linux file permissions of the XSLT_PEDS script files so they won't run.)
 
   ## Usage
   
@@ -128,7 +128,7 @@
 
      In Linux, the unzipping scripts may be run either from a file manager
      or the command line. In Windows, the unzipping scripts will only run
-     from the command line within WSL or Cygwin. When running from the
+     from the command line within WSL Linux or Cygwin. When running from the
      command line in either case, a script must be run from the XSLT_PEDS
      folder and its name must be preceded by `./` (e.g. `./unzipa`).
 
@@ -177,12 +177,16 @@
 
   ## Tips
 
-  1. Depending on the file manager used, you may be able to select
+  1. For Windows users, you may wish to create a shortcut to your
+     WSL Linux or Cygwin home folder or your XSLT_PEDS folder, on your
+     Desktop or elsewhere, to make them easier to get to.
+
+  2. Depending on the file manager used, you may be able to select
      multiple generated Html files and hit "Enter" -- or open a context
      menu (i.e. "right-click menu") and click "Open" -- to open the files
      in a collection of (randomly-ordered) tabs.
 
-  2. The Html files are completely portable; i.e. you can move them to
+  3. The Html files are completely portable; i.e. you can move them to
      any folder, email them to someone, etc.
 
 ---
