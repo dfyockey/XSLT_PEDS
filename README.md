@@ -10,23 +10,48 @@
   
   ## Description
   
-  XSLT_PEDS is a collection of scripts and XSLT formatting to facilitate
-  viewing search results downloaded in XML format from the USPTO's
-  Patent Examination Data System (https://ped.uspto.gov/peds/).
+  XSLT_PEDS is a collection of Bash scripts and XSLT formatting to
+  facilitate viewing search results downloaded in XML format from the
+  USPTO's Patent Examination Data System (https://ped.uspto.gov/peds/).
+
 
   ## Requirements & Recommendations
 
-  ### Linux users
-    - Xalan (may be listed in package managers as 'xalan' or 'xalan-c', required)
-    - unzip (required)
-    - zenity (recommended; omit for program feedback to appear in-terminal)
+  The following are recommended configurations for different systems.
+  All recommendations & requirements are available cost-free.
 
-  ### Windows 10 users
-    - WSL 1 or better (required)
-    - WSL-compatible Linux (required)
-    - Packages installed within Linux:
-        - Xalan (may be listed in package managers as 'xalan' or 'xalan-c', required)
-        - unzip (required)
+  ### Linux users
+   - Xalan (required; listed in package managers as 'xalan' or 'xalan-c')
+   - unzip (required)
+   - zenity (recommended; omit for program feedback to appear in-terminal)
+
+  ### Microsoft Windows 10 users
+   - At a minimum, familiarity with Linux commands `ls` and `cd` is recommended to facilitate usage.
+   - Windows Subsystem for Linux (WSL 1 or 2 is required; WSL 1 is recommended for setup simplicity)
+   - WSL-compatible Linux (required; the latest LTS (long-term support) version of Ubuntu is recommended)
+   - Packages installed within WSL-compatible Linux:
+     - Xalan (required; e.g. to install in Ubuntu, run the command `sudo apt-get install xalan`)
+     - unzip (required; e.g. to install in Ubuntu, run the command `sudo apt-get install unzip`)
+
+   For detailed WSL setup information from Microsoft, please see:
+   - [Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+
+  ### Microsoft Windows 10, 8.1, 8, 7, or Vista users
+  Windows 10 users may prefer the following configuration if they already use Cygwin for other purposes.
+  XSLT_PEDS is untested on Windows prior to 10, but may work with this arrangement as well. If you test on
+  Windows prior to 10, please provide feedback about the results at https://github.com/dfyockey/XSLT_PEDS/issues
+  so these instructions may be updated accordingly.
+   - At a minimum, familiarity with Linux commands `ls` and `cd` is recommended to facilitate usage.
+   - Cygwin (required)
+     - sed (required; select in Cygwin setup)
+     - unzip (required; select in Cygwin setup)
+   - MSXML 6.0 (`msxml6.msi` required for 32-bit PCs; `msxml6_x64.msi` required for most 64-bit PCs; `msxml6_ia64.msi` required for 64-bit PCs with Itanium processors)
+   - MSXSL (`msxsl.exe` required; should be placed in C:\Windows\System32)
+
+   For downloads and more information please see:
+   - [Cygwin](https://www.cygwin.com/)
+   - [Microsoft Core XML Services (MSXML) 6.0](https://www.microsoft.com/en-us/download/details.aspx?id=3988)
+   - [Command Line Transformation Utility (msxsl.exe)](https://www.microsoft.com/en-us/download/details.aspx?id=21714)
 
   ### Mac OS X users
   XSLT_PEDS is untested on OS X but may work if Xalan and unzip are provided.
@@ -34,10 +59,11 @@
   https://github.com/dfyockey/XSLT_PEDS/issues so these instructions may be
   updated accordingly.
 
+
   ## Setup
 
   ### Linux users
-  Simply unzip the downloaded XSLT_PEDS zip file into folder of your choice.
+  Simply unzip the downloaded XSLT_PEDS zip file into the folder of your choice.
 
   If you are planning to use the Gnome Files file manager (and perhaps other
   FMs), you may need to change a preference to enable running XSLT_PEDS
@@ -56,17 +82,26 @@
        
     5. Close the "Preferences" window.
     
-  Note: Nothing tragic will happen if you try to run a script and the file
+  _Note:_ Nothing tragic will happen if you try to run a script and the file
   manager isn't set up or able to do it. It'll just open a text editor
   showing program code.
 
-  ### Windows 10 users
+  ### Windows users
   
-  1. Move the downloaded XSLT_PEDS zip file into folder of your choice.
+  1. Move the downloaded XSLT_PEDS zip file into your WSL Linux or Cygwin
+  home folder.
+  - The WSL Linux home folder is accessible by running WSL Linux (e.g. Ubuntu),
+    and from there running `explorer.exe .` (be sure to include the space and
+    the dot following `explorer.exe`). The folder will open in Windows Explorer.
+    It should have the same name as your WSL Linux username.
+  - The Cygwin home folder is in `C:\cygwin32\home\<user>` where, by default,
+    `<user>` is your Windows username.
   
-  2. Run the command `unzip zipfile`, where "zipfile" is the name of the
-     downloaded XSLT_PEDS zip file.
-  
+  2. From within WSL Linux or Cygwin, run the command `unzip zipfile`, where
+  `zipfile` is the name of the downloaded XSLT_PEDS zip file. DO NOT unzip
+  using Windows Explorer's "Extract" function! ("Extract" will mess up the
+  Linux file permissions of the XSLT_PEDS script files so they won't run.)
+
   ## Usage
   
   1. Perform a search on the USPTO's Patent Examination Data System at
@@ -90,7 +125,13 @@
          unzipo - Unzip to One - Unzips a PEDS collection of Xml files
                   and combines them into one uniquely-named Html file
                   located in the XSLT_PEDS folder.
-  
+
+     In Linux, the unzipping scripts may be run either from a file manager
+     or the command line. In Windows, the unzipping scripts will only run
+     from the command line within WSL Linux or Cygwin. When running from the
+     command line in either case, a script must be run from the XSLT_PEDS
+     folder and its name must be preceded by `./` (e.g. `./unzipa`).
+
      When run, the chosen unzipping script will act on the latest .zip
      file it finds in the XSLT_PEDS folder. The Html file, files, or
      folder containing Html files should appear in the XSLT_PEDS folder.
@@ -103,13 +144,16 @@
      desired. You can retain or delete zipTrash or its contents as you
      wish.
      
-     The unzipping scripts may be run either from a file manager or the
-     command line. If run from the command line, the script name must be
-     preceded by `./` (e.g. `./unzipa`). Also, the file to be unzipped may
-     alternatively be provided as an argument when running from the
-     command line.
+     The file to be unzipped may alternatively be provided as an argument
+     when running from the command line, in which case it will not be moved
+     upon completion.
      
   5. Open the generated Html files to view the formatted PEDS data.
+  
+  _Note for Technical Users:_ `unzippeds` is run be each of the aforementioned
+  scripts to perform their operations. It may be used directly or within a script
+  to perform any of those operations by providing an appropriate argument.
+  Run `unzippeds -?` for usage information.
 
   ## Viewing Options
   
@@ -133,12 +177,16 @@
 
   ## Tips
 
-  1. Depending on the file manager used, you may be able to select
+  1. For Windows users, you may wish to create a shortcut to your
+     WSL Linux or Cygwin home folder or your XSLT_PEDS folder, on your
+     Desktop or elsewhere, to make them easier to get to.
+
+  2. Depending on the file manager used, you may be able to select
      multiple generated Html files and hit "Enter" -- or open a context
      menu (i.e. "right-click menu") and click "Open" -- to open the files
      in a collection of (randomly-ordered) tabs.
 
-  2. The Html files are completely portable; i.e. you can move them to
+  3. The Html files are completely portable; i.e. you can move them to
      any folder, email them to someone, etc.
 
 ---
